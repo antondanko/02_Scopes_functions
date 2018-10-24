@@ -32,7 +32,81 @@
 // 2. При выборе соответствующего option осуществить вывод
 //    соответствующих пользователей в элемент <div id="res"></div>
 
+'use strict';
 
+const usersSelect = document.getElementById('users-select');
+const res = document.getElementById('res');
+
+let users = [
+ {id: 1, name: "John", age: "20"},
+ {id: 2, name: "Sasha", age: "30"},
+ {id: 3, name: "Bill", age: "40"},
+ {id: 4, name: "Ashley", age: "20"},
+ {id: 5, name: "Rachel", age: "40"},
+ {id: 6, name: "Tom", age: "30"},
+ {id: 7, name: "Steve", age: "30"},
+ {id: 8, name: "Jim", age: "40"},
+ {id: 9, name: "Willy", age: "20"}
+];
+
+addToSelectOptins();
+start();
+
+// добавление значений в селект
+function addToSelectOptins () {
+	let arr = [];
+	users.forEach(function(item){
+		let pushed = arr.push(item.age);
+	});		
+	let arrSort = unique(arr);	
+	arrSort.forEach(function(item){
+		let newOption = new Option(item);
+		usersSelect.appendChild(newOption);		
+	});
+}	
+
+
+// сравнение значения селекта и возраста, вывод нужных имен в див
+function start(){
+	let newStr = "<ul>";
+	users.forEach(function(item){		
+		newStr += "<li>" + item.name + " </li> ";
+		console.log(item.name);	
+	});
+	newStr += "</ul>";
+	res.innerHTML = newStr;
+}
+
+usersSelect.addEventListener("change", function () {
+	let categVal = usersSelect.value;	
+	let newStr = "<ul>";
+	users.forEach(function(item){
+		if ( item.age === categVal){
+			newStr += "<li>" + item.name + " </li> ";
+			console.log(item.name);			
+		} else if (categVal === 'Choose age') {
+			newStr += "<li>" + item.name + " </li> ";
+		}
+	});
+	newStr += "</ul>";
+	res.innerHTML = newStr;
+	
+});
+
+// уникальные значения age, которые нужно передать в селект
+function unique(arr) {
+  var result = [];
+
+  nextInput:
+    for (var i = 0; i < arr.length; i++) {
+      var str = arr[i]; // для каждого элемента
+      for (var j = 0; j < result.length; j++) { // ищем, был ли он уже?
+        if (result[j] == str) continue nextInput; // если да, то следующий
+      }
+      result.push(str);
+    }
+  return result;
+}
 
 
 </script>

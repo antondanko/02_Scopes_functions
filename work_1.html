@@ -24,6 +24,29 @@
 // и выводить элементы массива в ul с id="res"
 // Вывод должен осуществляться в отсортированном по алфавиту виде
 
+'use strict';
+let arr = ["Tom", "Steve", "Bill", "Rita", "Pete", "Ashley"];
+const list = document.getElementById('list');
+
+map(arr, addLi);
+
+// Сигнатура map
+function map(array, func){
+
+	let arrSort = array.sort();
+	func(arrSort);		
+}
+
+function addLi (sort){
+
+	sort.forEach(function(item){
+		let li = document.createElement('li');
+		li.classList = ('list-group-item');			
+		li.innerHTML	= item;
+		list.appendChild(li);
+	});		
+}
+
 
 
 </script>
